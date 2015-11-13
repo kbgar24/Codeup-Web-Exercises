@@ -47,7 +47,7 @@
         <textarea id="body" name="body" type="text" rows="25" cols="40" placeholder="Compose Email"></textarea>
     </p>
      <p>
-        <button type="submit"><img src="/img/send.jpg"></button>
+        <button type="submit"><img src="/img/send.jpg"></button> 
     </p>
 	<p>	
         <ol><h1>Multiple Choice Test</h1>
@@ -90,6 +90,9 @@
     			<label>
     				<input type="checkbox" name="vacation" value="Hawaii">Hawaii
     			</label>
+                <label>
+                    <input type="checkbox" name="vacation" value="Germany">Germany
+                </label>
         <li><p><strong>What are your favorite movie genres?</strong><em> Select all that apply!</em></p></li>
              <select id="movie-genres" name="movie-genres[]" multiple>
                 <option value="horror">Horror</option>
