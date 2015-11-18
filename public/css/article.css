@@ -1,0 +1,26 @@
+h1 {
+		font-weight:normal;
+	}
+.headline_class {
+	color: green;
+}
+#headline_1 {
+	background-color: orange;
+	display:inline;
+}
+h1, .abstract {
+		/*transform: rotate(180deg);*/
+	}
+
+article h1{
+}
+/*Look for everything that has an important tag within a paragragh*/
+p .important
+
+/*Look for every paragraph that has a class of important*/
+p.important
+
+#article-subhead {
+		background-color: turquoise;
+		display: inline;
+	}
