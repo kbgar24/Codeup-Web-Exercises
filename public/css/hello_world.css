@@ -1,0 +1,43 @@
+h1 {
+	color: yellow;
+	text-decoration: underline;
+	text-align: center
+}
+#intro-p, blockquote {
+	text-align: center
+}
+h2 {
+	color: orange;
+	text-decoration: underline;
+}
+body {
+	background-image: url("http://www.drodd.com/images10/desktop-background9.jpg");
+	background-repeat: repeat-y;
+	color: white;
+	font-family: san serif;
+}
+ol {
+    display: inline-block;
+    background: #ff9999;
+    padding: 20px;
+}
+
+ul {
+    display: inline-block;
+    background: #3399ff;
+    padding: 20px;
+    list-style-type: square;
+}
+
+ol li {
+    background: #ffe5e5;
+    padding: 5px;
+    margin-left: 35px;
+    color: black;
+}
+
+ul li {
+    background: #cce5ff;
+    margin: 5px;
+    color: black;
+}
