@@ -1,3 +1,14 @@
+body {
+	background: repeating-linear-gradient(
+	
+		45deg,
+		#606dbc,
+		#606dbc 20px,
+		#465298 20px,
+		#465298 40px
+	);
+	background-size: cover
+}
 h1 {
 	font-size: 50px;
 	font-weight: bolder;
