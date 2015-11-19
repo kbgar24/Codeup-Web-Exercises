@@ -1,0 +1,46 @@
+h1 {
+	font-size: 50px;
+	font-weight: bolder;
+	padding-top: 40px
+}
+
+h2 {
+	font-size: 30px;
+}
+
+#george {
+	background-color: #C80000;
+	text-decoration: line-through;
+}
+div {
+	font-size: 25px;
+	font-family: Helvetica
+}
+#para_1 {
+	text-align:left;
+}
+
+#para_2 {
+	text-align: right;
+}
+#beware {
+	font-weight: bold;
+}
+#para_3 {
+	text-align: left;
+}
+#twas, #vorpal {
+	padding-left: 143px;
+}
+footer {
+	font-size: 62px;
+	font-family: fantasy;
+	color: black;
+}
+a:link {
+	color: black;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}

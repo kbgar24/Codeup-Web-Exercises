@@ -12,9 +12,9 @@ h2 {
 }
 body {
 	background-image: url("http://www.drodd.com/images10/desktop-background9.jpg");
-	background-repeat: repeat-y;
+	background-size: cover;
 	color: white;
-	font-family: san serif;
+	font-family: "san serif;
 }
 ol {
     display: inline-block;
@@ -41,3 +41,8 @@ ul li {
     margin: 5px;
     color: black;
 }
+
+#top + h2 {
+	font-size: 100px;
+}
+
