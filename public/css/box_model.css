@@ -1,0 +1,32 @@
+.box {
+	border: 1px solid black;
+	width: 172px;
+	height: 72px;
+	padding: 6px;
+	margin:10px;
+	color: white;
+	text-decoration: bolder
+}
+#red_box {
+	background-color: #DA4231;
+}
+#orange_box {
+	margin-left: 30px;
+	background-color: #EAAE33;
+}
+#yellow_box {
+	margin-left: 60px;
+	background-color: #FCF732;
+}
+#green_box {
+	margin-left: 90px;
+	background-color: #578C05;
+}
+#blue_box {
+	margin-left: 120px;
+	background-color: #234AFB;
+}
+#purple_box {
+	margin-left: 150px;
+	background-color: #DF8BF0;
+}

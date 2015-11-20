@@ -1,4 +1,4 @@
-body {
+/*body {
 	background: repeating-linear-gradient(
 	
 		45deg,
@@ -7,7 +7,7 @@ body {
 		#465298 20px,
 		#465298 80px
 	);
-}
+} */
 h1 {
 	font-size: 50px;
 	font-weight: bolder;
@@ -26,21 +26,16 @@ div {
 	font-size: 25px;
 	font-family: Helvetica
 }
-#para_1 {
+.para {
 	text-align:left;
 }
 
 #para_2 {
 	text-align: right;
 }
-#beware {
-	font-weight: bold;
-}
-#para_3 {
-	text-align: left;
-}
+
 #twas, #vorpal {
-	padding-left: 143px;
+	text-indent: 143px;
 }
 footer {
 	font-size: 62px;
