@@ -1,0 +1,96 @@
+header {
+	box-sizing: border-box;
+	border: 1px solide white;
+	height: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.box {
+	box-sizing: border-box;
+	border: 1px solid black;
+	width: 72px;
+	height: 72px;
+	padding: 11px;
+	margin: 25px;
+	color: white;
+	text-decoration: bolder;
+	font-size: 15px
+
+}
+#red_box {
+	background-color: #DA4231;
+	position: absolute;
+	top: 70px;
+	left: 0px;
+	
+}
+#orange_box {
+	background-color: #EAAE33;
+	/*float: left;*/
+	position: absolute;
+	top: 70px;
+	left: 132px;
+}
+#yellow_box {
+	background-color: #FCF732;
+	position: absolute;
+	top: 70px;
+	left: 254px;
+}
+#green_box {
+	background-color: #578C05;
+	position: absolute;
+	top: 192px;
+	left: 0px;
+	
+	
+}
+#blue_box {
+
+	background-color: #234AFB;
+	position: absolute;
+	top: 192px;
+	left: 132px;
+}
+
+#purple_box {
+	
+	background-color: #DF8BF0;
+	position: absolute;
+	top: 192px;
+	left: 254px;
+}
+
+#red_arrow {
+	position: absolute;
+	top: 65px;
+	left: 70px;
+}
+
+#orange_arrow {
+	position: absolute;
+	top: 65px;
+	left: 202px;
+}
+
+#yellow_arrow {
+	position: absolute;
+	top: 65px;
+	left: 326px;
+}
+
+#green_arrow {
+	position: absolute;
+	top: 187px;
+	left: 70px;
+}
+#blue_arrow {
+	position: absolute;
+	top: 187px;
+	left: 202px;
+}#purple_arrow {
+	position: absolute;
+	top: 187px;
+	left: 326px;
+}

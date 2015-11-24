@@ -1,11 +1,17 @@
 .box {
+	box-sizing: border-box;
 	border: 1px solid black;
 	width: 172px;
 	height: 72px;
 	padding: 6px;
 	margin:10px;
 	color: white;
-	text-decoration: bolder
+	text-decoration: bolder;
+	transition: width 5s;
+  	-moz-transition: width 1s; /* Firefox 4 */
+  	-webkit-transition: width 1s; /* Safari and Chrome */
+  	-o-transition: width 1s; /* Opera */
+ 	-ms-transition: width 1s; /* IE9 (maybe) */
 }
 #red_box {
 	background-color: #DA4231;
@@ -25,8 +31,45 @@
 #blue_box {
 	margin-left: 120px;
 	background-color: #234AFB;
+	margin-bottom: 0px
+}
+#indigo_box {
+	margin-left: 450px;
+	background-color: white;
+	border: none;
+	height: 10px;
+	padding: 0px;
+	margin: 0px;
+	width: auto;
+	color: transparent;
+}
+#indigo_box:hover {
+	background-color: indigo;
+	width: auto;
+	height: 72px;
+	padding: 6px;
+	margin-left:135px;
+	color: white;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 #purple_box {
 	margin-left: 150px;
 	background-color: #DF8BF0;
+	margin-top: 0px
+}
+
+.box:hover
+{
+  width:auto;
+}
+
+p {
+	display: inline;
+}
+.box 
+
+input {
+	width: 500px;
+	height: 100px;
 }
