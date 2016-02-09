@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Interactive Weather Map
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		h1, h2 {
+			text-align: center;
+			margin-top: 0px;
+		}
+		.someTemp {
+			font-weight: bold;
+			font-size: 35px;
+		}
+		#weatherIcon img {
+			width: 20; 
+		    height: 20;
+		}
+		#cityName, #cityName2 {
+			text-align: center;
+			font-size: 25;
+			font-weight: bold;
+			font-family: sans-serif;
+			background-color: 003366;
+			color: black;
+		}
+		#map-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .dayz {
+        	display: inline;
+        }
+        .row1{
+        	height: 100px;
+        	width: 100%;
+        	box-sizing: border-box;
+        	background-color: 003366;
+        }
+        .row {
+        	height: 300px;
+        	width: 100%;
+        	text-align: center;
+        	padding: 10px 180px;
+        	box-sizing: border-box;
+        	background-color: 003366;
+        }
+        .col-md-3, .col-md-3-B {
+        	height: 100%;
+        	width: 250px;
+        	margin: 5px 50px;
+        	padding: 15px;
+        	padding-top: 30px;
+        	float: left;
+        	border-radius: 12px;
+        	box-sizing: border-box;
+		    background-color: #ffffff;
+		    opacity: 0.7;
+		    filter: alpha(opacity=60); /* For IE8 and earlier */
+        }
+        body {
+       		background-image: url("/img/clouds.jpg");
+			background-size: cover;
+			transition: background-image 5s ease;
+		}
+        .container {
+        	margin: 0px;
+        	width: 100%;
+        	height: 100%;
+        }
+        .daye {
+        	font-size: 20px;
+        	font-weight: bold;
+        	font-family: sans-serif;
+        	background-color: 003366;
+        }
+        .col-md-8 p{
+        	text-decoration: underline;
+			font-weight: normal;
+			font-style: italic;
+			font-size: 20px;
+			text-align: center;
+			margin-bottom: 0px;
+			color: black;
+        }
+        .col-md-8 {
+        	background-color: #ffffff;
+		    opacity: 0.7;
+        }
+        .invisible {
+        	display: none;
+        }
+	</style>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKYj_O-hmy5dWj8WcUYkYQL1Bq2tCwA3Y"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row1">
+			<div class="col-md-8">
+				<p>Current City</p>
+				<h1 id="cityName"></h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="dayz">
+					<div id="day0" class="daye"></div>
+					<br>
+					<div id="weatherTemp0" class="someTemp"></div>
+					<div id="weatherIcon0"></div>
+					<div id="weatherData0"></div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="dayz">
+					<div id="day1" class="daye"></div>
+					<br>
+					<div id="weatherTemp1" class="someTemp"></div>
+					<div id="weatherIcon1"></div>
+					<div id="weatherData1"></div>
+				</div>
+			</div>
+			<div class="col-md-3">
+					<div id="day2" class="daye"></div>
+					<br>
+					<div id="weatherTemp2" class="someTemp"></div>
+					<div id="weatherIcon2"></div>
+					<div id="weatherData2"></div>	
+			</div>
+		</div>
+		<div class="row">
+			<div id="map-canvas"></div>
+			<div>
+				<button id="recenterBttnCur">Current City</button>
+				<button id="recenterBttnSel" class="invisible">Selected City</button>
+				<button id="resetMarker" class="invisible">Reset</button>
+			</div>
+		</div>
+		<div class="row1">
+			<div class="col-md-8 weatherBox invisible">
+				<p>Selected City</p>
+				<h1 id="cityName2"></h1>
+			</div>
+		</div>
+		<div class="row bottomRow invisible">
+			<div class="col-md-3">
+				<div id="markerDay0" class="daye selCityInfo"></div>
+				<br>
+				<div id="markerTemp0" class="someTemp selCityInfo"></div>
+				<div id="markerIcon0" class="selCityInfo"></div>
+				<div id="markerData0" class="selCityInfo"></div>
+
+			</div>
+			<div class="col-md-3">
+				<div id="markerDay1" class="daye selCityInfo"></div>
+				<br>
+				<div id="markerTemp1" class="someTemp selCityInfo"></div>
+				<div id="markerIcon1" class="selCityInfo"></div>
+				<div id="markerData1" class="selCityInfo"></div>
+			</div>
+			<div class="col-md-3">
+				<div id="markerDay2" class="daye selCityInfo"></div>
+				<br>
+				<div id="markerTemp2" class="someTemp selCityInfo"></div>
+				<div id="markerIcon2" class="selCityInfo"></div>
+				<div id="markerData2" class="selCityInfo"></div>
+			</div>
+		</div>
+	</div>
+
+<script>
+	$(document).ready(function(){
+		"use strict";
+		
+		/*--------------------------------------------------------------
+							
+							Tables of Contents
+							------------------
+
+			A. Global Variable Declaration
+			
+			B. Background Image Array Loop
+			
+			C. getMap Function
+				1. Creates & centers map at US geographical middle
+				2. Determines current location vs HTML5 Geolocation 
+				3. Codes 'Reset' button ('#resetMarker')
+				4. Sets "You are Here" InfoWindow at current location
+				5. Codes 'Current City' button ('#recenterBttnCur')
+				6. Geolocation Fails Use Case
+				7. Multiple Marker Use Case + Additional code for map buttons
+				8. Pulls Weather data for current location from OWM API ('getWeather()')
+				9. Function to capitalize the first letter of a string 
+				10. Converts Unix time to natural language date
+			
+			D. Drop Marker Function
+			
+			E. Get Weather for Selected City Function
+
+
+		--------------------------------------------------------------*/
+		
+
+
+
+
+
+		/* ------------------- Global Variable Declaration --------------------*/
+		
+		var geoCodeRequest = false;
+		var count = 0;
+		var gmarkers = [];
+		
+
+		/* ---------------- Background Image Array Loop ---------------*/
+	
+		var currentImg = 0;
+		
+		function changeBackgroundImg(){
+		    
+		    var imgSrc = [
+			"/img/storm.jpg",
+			"/img/sunset.jpg",
+			"/img/snow.jpg",
+			"/img/tornado.jpg",
+			"/img/clouds.jpg",
+			];
+		    
+		    if ( currentImg > imgSrc.length -1) {
+		        currentImg = 0;
+		    }
+		    $('body').css('background-image', 'url("' + imgSrc[currentImg] +'")');
+		    currentImg++;
+		};
+		setInterval(changeBackgroundImg, 9000);
+
+
+		/* ------------------- getMap Function -----------------------/
+			
+			 1. Creates & centers map at US geographical middle
+			 2. Determines current location via HTML5 Geolocation 
+			 3. Codes 'Reset' button ('#resetMarker')
+			 4. Sets "You are Here" InfoWindow at current location
+			 5. Codes 'Current City' button ('#recenterBttnCur')
+			 6. Geolocation Fails Use Case
+			 7. Multiple Marker Use Case + Additional code for map buttons
+			 8. Pulls Weather data for current location from OWM API ('getWeather()')
+			 9. Function to capitalize the first letter of a string 
+			 10. Converts Unix time to natural language date							 */
+		
+		function getMap(geoCodeRequest) { 
+				
+		//	1. Creates & centers map at US geographical middle
+
+				var latUSA = 39.833333;
+				var lngUSA = -98.583333;
+				var latlngUSA = {lat: latUSA, lng: lngUSA};
+		        var mapOptions = {
+		            zoom: 4,
+		            center: latlngUSA,
+		            mapTypeId: google.maps.MapTypeId.ROADMAP
+		        };
+		        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+				var infoWindow = new google.maps.InfoWindow({map: map});
+
+
+
+		//  2. Determines current location via HTML5 Geolocation
+
+				if (navigator.geolocation) {
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				    	var pos = {
+				        	lat: position.coords.latitude,
+				        	lng: position.coords.longitude
+				      	};
+					    var currentPos = pos;
+					    var currentPosArr = $.map(currentPos, function (value) { return value; });
+						var currentPosLat = currentPosArr[0];
+						var currentPosLng = currentPosArr [1];
+						var curPosLatLng = {
+							lat: currentPosLat,
+							lng: currentPosLng
+						};
+
+
+
+		//	3. Codes 'Reset' button ('#resetMarker')
+					
+						$("#resetMarker").click(function(){
+				    		map.panTo(curPosLatLng);
+				    		map.setZoom(4);
+				    		$("#recenterBttnSel").addClass("invisible");
+				    		$("#resetMarker").addClass("invisible");
+				    		count = 0;
+				    		gmarkers[0].setMap(null);
+				    		gmarkers = [];
+				    		$(".weatherBox").addClass("invisible");
+				    		$(".bottomRow").addClass("invisible");
+
+				    	});
+						getWeather(currentPosLat, currentPosLng);
+					
+
+
+		//	4. Sets "You are Here" InfoWindow at current location
+
+					    infoWindow.setPosition(pos);
+					    infoWindow.setContent('You are here.');
+					    map.setCenter(pos);
+					    if (infoWindow.content == 'You are here.') {
+						    geoCodeRequest = true
+						};
+					    
+
+
+		//	5. Codes 'Current City' button ('#recenterBttnCur')
+
+					    $("#recenterBttnCur").click(function(){
+					    	map.panTo(pos);
+					    	map.setZoom(4);
+					    })
+				    }, 
+
+
+
+		//	6. Geolocation Fails Use Case
+				    
+				    function() {
+				      handleLocationError(true, infoWindow, map.getCenter());
+				    });
+
+				 } else {
+				    // Browser doesn't support Geolocation
+				    handleLocationError(false, infoWindow, map.getCenter());
+					}
+
+				function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+				  infoWindow.setPosition(pos);
+				  infoWindow.setContent(browserHasGeolocation ?
+				                        'Error: The Geolocation service failed.' :
+				                        'Error: Your browser doesn\'t support geolocation.');
+					if (infoWindow.content == 'Error: The Geolocation service failed.') {
+					var typedLocation = prompt("Oops! It seems the geolocation has failed. Please enter your current location here:");
+					}
+				};
+				
+
+
+
+		//	7. Multiple Marker Use Case + Additional code for map buttons
+
+				map.addListener('click', function(e, curPosLatLng) {
+				    console.log(curPosLatLng);
+				    count++;
+				    if (count < 2) {
+					    placeMarkerAndPanTo(e.latLng, map);
+					    var clickLat = e.latLng.lat(arguments);
+					    var clickLng = e.latLng.lng(arguments);
+					    var clickLatLng = {
+					    	lat: clickLat,
+					    	lng: clickLng
+					    };
+					    $("#recenterBttnSel").removeClass("invisible");
+					    $("#resetMarker").removeClass("invisible");
+					    $("#recenterBttnSel").click(function(){
+				    		map.panTo(clickLatLng);
+				    		map.setZoom(4);
+				    	});
+					    console.log(e.latLng.lat(arguments));
+					    console.log(e.latLng.lng(arguments));
+					    getWeather2(clickLat, clickLng);  
+					} else {
+						alert("You can only drop one marker. Please use the 'Reset' button to start over.")
+					}
+				});//<---Closes map.addListener function
+
+
+
+		//	8. Pulls Weather data for current location from OWM API 
+				
+				function getWeather(currentPosLat, currentPosLng) {
+					$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+						APPID: "b01b13f0ec12ebc5574326d79b29b012",
+						lat: currentPosLat,
+						lon: currentPosLng,
+						units: "imperial"
+					})
+						.done(function(data){
+							(data.list).forEach(function(element, index){
+								
+								$("#weatherTemp" + index).html(Math.round(element.temp.max) + "&deg;/" + Math.round(element.temp.min) + "&deg;" + "<br>");
+								
+								var iconSrc = "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png";
+								
+								var iconAlt = element.weather[0].main + " skies icon";
+								
+								document.createElement('img')
+									$('#weatherIcon' + index).append($('<img>', { 
+									    src : iconSrc,
+									    alt : iconAlt
+									}));
+
+
+
+		// 9. Function to capitalize the first letter of a string 
+
+								String.prototype.capFrst = function() {
+									return this.charAt(0).toUpperCase() + this.slice(1);
+									};
+								var capVar = 
+									element.weather[0].description.capFrst();
+									$("#weatherData" + index).html(capVar + "<br>" +
+										"Humidity: " + element.humidity + "<br>" +
+										"Wind: " + element.speed + "<br>" +
+										"Pressure: " + element.pressure);
+						
+
+
+		//	10. Converts Unix time into natural language date
+								
+								var heute = element.dt*1000; //Converts Unix to miliseconds
+								var d1 = new Date(heute); //Converts miliseconds to date
+								var n1 = d1.getDate(); //Parses day of month [int] fr. date 
+								var w1 = d1.getDay(); //Parses day of week [int] from data
+								var m1 = d1.getMonth(); //Parses month [int] from date
+								var days = ["Sunday, ", "Monday, ", "Tuesday, ", "Wednesday, ", "Thursday, ", "Friday, ", "Saturday, "];
+								var month = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December " ]
+								var m1Prime = month[m1]; //Converts mnth to nat. lang. mnth
+								var w1Prime = days[w1]; //Converts day to nat. lang. day
+								var natLangDate = w1Prime + m1Prime + n1;
+								$("#day" + index).html(natLangDate);		
+							}); // <---Closes (data.list).forEach function
+							$("#cityName").html(data.city.name + ", " + data.city.country);
+						}) //<---Closes .done function
+					}; //<---Closes getWeather()
+				}; //<---Closes getMap
+	getMap();
+
+
+
+	/*-------------------------- Drop Marker Function -------------------------*/ 
+
+	function placeMarkerAndPanTo(latLng, map) {
+		var marker = new google.maps.Marker({
+	    	position: latLng,
+	    	map: map
+	  	});
+		gmarkers.push(marker); //<---Pushes the dropped marker to array 4 counting purposes
+		map.panTo(latLng);
+		getWeather2();
+	}
+	
+
+	
+	/*---------------- Get Weather for Selected City Function -----------------*/
+
+	var getWeather2 = function(clickLat, clickLng) {
+		$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+			APPID: "b01b13f0ec12ebc5574326d79b29b012",
+			lat: clickLat,
+			lon: clickLng,
+			units: "imperial"
+		})
+			.done(function(data){
+				$(".bottomRow").removeClass("invisible");
+				$(".weatherBox").removeClass("invisible");
+				(data.list).forEach(function(element, index){
+					$("#markerTemp" + index).html(Math.round(element.temp.max) + "&deg;/" + Math.round(element.temp.min) + "&deg;" + "<br>");
+					var iconSrc = "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png";
+					
+					var iconAlt = element.weather[0].main + " skies icon";
+					
+					document.createElement('img')
+					$('#markerIcon' + index).html($('<img>', { 
+						    src : iconSrc,
+						    alt : iconAlt
+					}));
+					String.prototype.capFrst = function() {
+						return this.charAt(0).toUpperCase() + this.slice(1);
+					};
+					var capVar = element.weather[0].description.capFrst();
+					$("#markerData" + index).html(capVar + "<br>" +
+						"Humidity: " + element.humidity + "<br>" +
+						"Wind: " + element.speed + "<br>" +
+						"Pressure: " + element.pressure);
+					var heute = element.dt*1000;
+					var d1 = new Date(heute);
+					var n1 = d1.getDate(); 
+					var w1 = d1.getDay(); 
+					var m1 = d1.getMonth();
+					var days = ["Sunday, ", "Monday, ", "Tuesday, ", "Wednesday, ", "Thursday, ", "Friday, ", "Saturday, "];
+					var month = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December " ]
+					var m1Prime = month[m1];
+					var w1Prime = days[w1];
+					var natLangDate = w1Prime + m1Prime + n1;
+					$("#markerDay" + index).html(natLangDate);
+				}); 
+				$("#cityName2").html(data.city.name + ", " + data.city.country);
+			})
+		};
+	});	
+</script>
+</body>
+</html>
