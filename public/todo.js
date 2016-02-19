@@ -421,7 +421,6 @@ $(document).ready(function(){
 
 	$("#btn-uncomp-items").click(function(event){
 		event.preventDefault();
-		$("#insertProducts").fadeOut();
 		$("#insertProducts").text("");
 
  		$.get("/todo-json.php?complete=false")
@@ -467,7 +466,6 @@ $(document).ready(function(){
 			         	}))
                 	);
                 });
-            	$("#insertProducts").fadeIn();
             })
             .fail(function(){
                 console.log("AJAX request failed");
