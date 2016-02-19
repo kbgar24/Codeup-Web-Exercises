@@ -1,0 +1,161 @@
+<html>
+<head>
+    <title>To Do App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <style type="">
+        .tableHead {
+            text-align: center;
+            cursor: pointer;
+        }
+        .tableHead:hover {
+            background-color: #D3D3D3; 
+        }
+        form {
+            text-align: center;
+        }
+
+        table {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .spacer {
+            height: 15px;
+        }
+
+        .myBtn {
+            cursor: pointer;
+            text-align: center;
+                -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+            box-shadow:inset 0px 1px 0px 0px #cf866c;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+            background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+            background-color:#d0451b;
+           /* -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;*/
+            border:1px solid #942911;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            /*font-family:Arial;*/
+            /*font-size:13px;*/
+            /*padding:6px 24px;*/
+            text-decoration:none;
+            text-shadow:0px 1px 0px #854629;
+        }
+
+        .myBtn:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+            background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+            background-color:#bc3315;
+        }
+
+        .myButton {
+            -moz-box-shadow:inset 0px 1px 0px 0px #3dc21b;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #3dc21b;
+            box-shadow:inset 0px 1px 0px 0px #3dc21b;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #3f9412));
+            background:-moz-linear-gradient(top, #44c767 5%, #3f9412 100%);
+            background:-webkit-linear-gradient(top, #44c767 5%, #3f9412 100%);
+            background:-o-linear-gradient(top, #44c767 5%, #3f9412 100%);
+            background:-ms-linear-gradient(top, #44c767 5%, #3f9412 100%);
+            background:linear-gradient(to bottom, #44c767 5%, #3f9412 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#3f9412',GradientType=0);
+            background-color:#44c767;
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+            border:1px solid #18ab29;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:13px;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #2f6627;
+        }
+        .myButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3f9412), color-stop(1, #44c767));
+            background:-moz-linear-gradient(top, #3f9412 5%, #44c767 100%);
+            background:-webkit-linear-gradient(top, #3f9412 5%, #44c767 100%);
+            background:-o-linear-gradient(top, #3f9412 5%, #44c767 100%);
+            background:-ms-linear-gradient(top, #3f9412 5%, #44c767 100%);
+            background:linear-gradient(to bottom, #3f9412 5%, #44c767 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f9412', endColorstr='#44c767',GradientType=0);
+            background-color:#3f9412;
+        }
+        .myButton:active, .myBtn:active {
+            position:relative;
+            top:1px;
+        }
+       #mainTable tr.row:hover td,  #mainTable tr.altrow:hover td {
+            color: black;
+            background-color: black;
+    
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>My To-Do List</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form name="new-item">
+                    <input type="text" id="content" placeholder="Item"></input>
+                    <input type="text" id="priority" placeholder="Priority"></input>
+                    <input type="datez" id="due_date" placeholder="Due Date"></input>
+                    <button id="btn-new-item">Add New To Do Item</button>
+                </form>
+                <form>
+                     <button id="btn-show-items">Show All Items</button>
+                    <button id="btn-comp-items">Show Completed Items</button>
+                    <button id="btn-uncomp-items">Show Uncompleted Items</button>
+                    <br>
+                </form>                     
+            </div>
+        </div>
+        <div class="row">
+             <table id="mainTable" class="table table-hover">
+                 <thead>
+                    <tr>
+                        <th id="contentHead" class="tableHead">Content</th>
+                        <th id="createdHead" class="tableHead">Created</th>
+                        <th id="priorityHead" class="tableHead">Priority</th>
+                        <th id="dueHead" class="tableHead">Due Date</th>
+                        <th id="idHead" class="tableHead">ID</th>
+                        <th id="compStatus" class="tableHead">Completion Status</th>
+                        <th id="deleteBttn" class="tableHead">Delete</th>
+                        <th id="completeBttn" class="tableHead">Completed</th>
+                    </tr>
+                </thead>
+                <tbody id="insertProducts" class="table-hover"></tbody>
+            </table>
+
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"type="text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="todo.js"></script>
+</body>
+</html>
