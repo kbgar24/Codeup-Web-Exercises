@@ -1,0 +1,126 @@
+.main{
+	margin-top: 1%;
+}
+.flow-text{
+	line-height: 1.3;
+    font-family: "Roboto", sans-serif;
+    font-weight: lighter;
+    color: rgba(0,0,0,0.87);
+}
+
+.blueText {
+	color:#0082C3; 
+	font-weight: normal;
+}
+
+.blueLine2 {
+    width: 100%;
+    height: 10px;
+    border-top: 1px solid #0082C3;
+    margin: 0px auto;
+
+}
+
+.indeed {
+	width: 14%;
+	margin: 0px auto;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	position: relative;
+	top: -10px;
+}
+
+.jobMap {
+	width: 55%;
+	height: 300px;
+	background: #0082C3;
+	margin: 0px auto;
+}
+
+.jobBoxes {
+	margin: 0px auto;
+	margin-top: 2%;
+}
+
+.box1,
+.box2,
+.box3 {
+	border: 1px solid #42A5F5;
+	border-radius: 8px;
+	padding: 2%;
+	/*margin-bottom: 2%;*/
+	margin: 0px auto;
+
+	-webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: 1;
+}
+
+.box1,
+.box2,
+.box3{
+	margin:4%;
+}
+
+.box1{
+	margin-left: 5%;
+}
+
+.marker{
+	margin: 0px auto;
+}
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #42E035;
+    text-align: center;
+    letter-spacing: .5px;
+
+    /*transition: .2s ease-out;*/
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 1rem;
+    text-transform: none;
+
+    transition: .2s ease-out;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #7DFF5F;
+}
+
+.jobApiData {
+      font-size: 20px;
+      margin: 0px;
+      margin-bottom: 15px;
+      /*text-decoration: underline;*/
+      font-family: "Roboto", "sans-serif";
+      font-weight: light;
+}
+.dataUnderline {
+      height: 1px;
+      width: 120px;
+      margin: 0px auto;
+      border-bottom: 1px solid black;
+
+}
+.dataType {
+      font-family: "Roboto", "sans-serif";
+      font-style: italic;
+      margin: 0px;
+      font-weight: lighter;
+
+    }
+.jobTitle {
+      /*text-decoration: underline;*/
+      font-weight: bolder;
+      color: black;
+    }
+.oweText {
+      font-weight: 700;
+    color: red;
+    font-size: 60px;
+}

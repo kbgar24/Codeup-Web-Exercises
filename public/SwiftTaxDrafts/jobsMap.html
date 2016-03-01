@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+       <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKYj_O-hmy5dWj8WcUYkYQL1Bq2tCwA3Y"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" href="animate.min.css">
+<link rel="stylesheet" type="text/css" href="css/swifttaxowe.css">
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 500px;
+        width: 800px;
+        margin: 20px auto;
+      }
+      .center {
+      text-align: center;
+    }
+
+    .jobBox {
+      height: 300px;
+      width: 200px;
+      background-color: #BADBF5;
+      background-image: -webkit-linear-gradient(top, #BADBF5 0%, #42A5F5 100% );
+      border: 1px solid green;
+      border-radius: 7px;
+      margin: 100px;
+    }
+    .dataType {
+      font-family: "Roboto", "sans-serif";
+      font-style: italic;
+      margin: 0px;
+      font-weight: lighter;
+
+    }
+    .next-button {
+      color: white;
+      background-color: #42E035;
+      border-radius: 7px;
+      text-transform: none;
+    }
+    .jobBoxLetter {
+      border: 1px solid black;
+      width: 18px;
+      margin: 20px auto;
+      background-color: darkgreen;
+      color: white;
+      border-radius: 5px;
+    }
+    .jobApiData {
+      font-size: 20px;
+      margin: 0px;
+      margin-bottom: 15px;
+      /*text-decoration: underline;*/
+      font-family: "Roboto", "sans-serif";
+      font-weight: light;
+
+    }
+    .jobTitle {
+      /*text-decoration: underline;*/
+      font-weight: bolder;
+    }
+
+    .applyBtn {
+      margin-top: 20px;
+    }
+
+    .dataUnderline {
+      height: 1px;
+      width: 120px;
+      margin: 0px auto;
+      border-bottom: 1px solid black;
+
+    }
+
+    .main{
+  margin-top: 1%;
+}
+.flow-text{
+  line-height: 1.3;
+    font-family: "Roboto", sans-serif;
+    font-weight: lighter;
+    color: rgba(0,0,0,0.87);
+}
+
+.blueText {
+  color:#0082C3; 
+  font-weight: normal;
+}
+
+.blueLine2 {
+    width: 100%;
+    height: 10px;
+    border-top: 1px solid #0082C3;
+    margin: 0px auto;
+
+}
+
+.indeed {
+  width: 14%;
+  margin: 0px auto;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  top: -10px;
+}
+
+.jobMap {
+  width: 55%;
+  height: 300px;
+  background: #0082C3;
+  margin: 0px auto;
+}
+
+.jobBoxes {
+  margin: 0px auto;
+  margin-top: 2%;
+}
+
+.box1,
+.box2,
+.box3 {
+  border: 1px solid #42A5F5;
+  border-radius: 8px;
+  padding: 2%;
+  /*margin-bottom: 2%;*/
+  margin: 0px auto;
+
+  -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: 1;
+}
+
+.box1,
+.box2,
+.box3{
+  margin:4%;
+}
+
+.box1{
+  margin-left: 5%;
+}
+
+.marker{
+  margin: 0px auto;
+}
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #42E035;
+    text-align: center;
+    letter-spacing: .5px;
+
+    /*transition: .2s ease-out;*/
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 1rem;
+    text-transform: none;
+
+    transition: .2s ease-out;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #7DFF5F;
+}
+
+.jobApiData {
+      font-size: 20px;
+      margin: 0px;
+      margin-bottom: 15px;
+      /*text-decoration: underline;*/
+      font-family: "Roboto", "sans-serif";
+      font-weight: light;
+}
+.dataUnderline {
+      height: 1px;
+      width: 120px;
+      margin: 0px auto;
+      border-bottom: 1px solid black;
+
+}
+.dataType {
+      font-family: "Roboto", "sans-serif";
+      font-style: italic;
+      margin: 0px;
+      font-weight: lighter;
+
+    }
+.jobTitle {
+      /*text-decoration: underline;*/
+      font-weight: bolder;
+      color: black;
+    }
+.oweText {
+    font-weight: 700;
+    color: red;
+    font-size: 60px;
+}
+
+    </style>
+    
+  </head>
+  <body>
+      <div id="everything"> 
+       <p class="flow-text center blueText">You owe the Federal government</p>
+      <div class="flow-text center blueText oweText">$5,435.23 
+      <span class="taxesOwed"> <!-- Money owed goes here --> </span></div>
+        <div class="blueLine2 center"></div>
+    
+  <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 flow-text center">
+        To help pay off your tax debt, here's a selection of local jobs you might be interested in from 
+      </div>
+  
+    </div>
+    <a href ="http://www.indeed.com/" target="_blank">
+      <img class="img-responsive indeed hoverable" src ="/img/indeed.png"></a>
+
+
+    <div class="jobMap" id="map"></div>
+
+    <div class="row jobBoxes">
+      
+        <div id="box1Class" class="col-sm-3 hoverable center blueText box1 animate flipInY boxes">
+          <img class="img-responsive marker" src="/img/markera.png">
+          <p id="jobTitle0" class="center jobTitle"></p>
+          <p class="dataType">Employer</p>
+          <div class="dataUnderline"></div>
+          <h2 id="employer0" class="jobApiData">Century 21</h2>
+          <p class="dataType">Posted</p>
+          <div class="dataUnderline"></div>
+          <h2 id="posted0" class="jobApiData">4 hours ago</h2>
+          <a id="applyBtn0" class="applyBtn waves-effect waves-light btn" href="#">Apply Now!</a>
+      </div>
+        
+        <div class="col-sm-3 hoverable center blueText box2 animate flipInY boxes">
+          <img class="img-responsive marker" src="/img/markerb.png">
+          <p id="jobTitle1" class="center jobTitle"></p>
+          <p class="dataType">Employer</p>
+          <div class="dataUnderline"></div>
+          <h2 id="employer1" class="jobApiData">Century 21</h2>
+          <p class="dataType">Posted</p>
+          <div class="dataUnderline"></div>
+          <h2 id="posted1" class="jobApiData">4 hours ago</h2>
+          <a id="applyBtn1" class="applyBtn waves-effect waves-light btn" href="#">Apply Now!</a>
+      </div>
+        
+        <div class="col-sm-3 hoverable center blueText box3 animate flipInY boxes">
+            <img class="img-responsive marker" src="/img/markerc.png">
+            <p id="jobTitle2" class="center jobTitle"></p>
+            <p class="dataType">Employer</p>
+            <div class="dataUnderline"></div>
+            <h2 id="employer2" class="jobApiData">Century 21</h2>
+            <p class="dataType">Posted</p>
+            <div class="dataUnderline"></div>
+            <h2 id="posted2" class="jobApiData">4 hours ago</h2>
+            <a id="applyBtn2" class="applyBtn waves-effect waves-light btn" href="#">Apply Now!</a>
+        </div>
+
+      
+      </div>
+</div>
+
+    <script>
+      var markersArray = [];
+      var jobLatLng;
+      var map;
+      var zip = 78234;
+      var currentLatLng = {
+        lat: 29.424122, 
+        lng: -98.493629
+      }
+      var jobTitle = " Lawyer ";
+      var query = ($.trim(jobTitle)).replace(/\s/g, "+");
+      console.log(query);
+      var jobUrl = "http://api.indeed.com/ads/apisearch?publisher=6167575085685252&q=" + query + "&l=" + zip + "&sort=&radius=&st=&jt=&start=&limit=3&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+        
+     function initMap() {
+          var latUSA = 39.833333;
+          var lngUSA = -98.583333;
+          var latlngUSA = {lat: latUSA, lng: lngUSA};
+          console.log(latlngUSA);
+          map = new google.maps.Map(document.getElementById('map'), {
+            // center: {lat: -34.397, lng: 150.644},
+            center: latlngUSA,
+            zoom: 4,
+            draggable: false
+          });
+        };
+        initMap();
+
+
+      function xmlToJson(xml) {
+        var obj = {};
+        if (xml.nodeType == 1) { // element
+          // do attributes
+          if (xml.attributes.length > 0) {
+          obj["@attributes"] = {};
+            for (var j = 0; j < xml.attributes.length; j++) {
+              var attribute = xml.attributes.item(j);
+              obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+            }
+          }
+        } else if (xml.nodeType == 3) { // text
+          obj = xml.nodeValue;
+        }
+        if (xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[0].nodeType === 3) {
+          obj = xml.childNodes[0].nodeValue;
+        }
+        else if (xml.hasChildNodes()) {
+          for(var i = 0; i < xml.childNodes.length; i++) {
+            var item = xml.childNodes.item(i);
+            var nodeName = item.nodeName;
+            if (typeof(obj[nodeName]) == "undefined") {
+              obj[nodeName] = xmlToJson(item);
+            } else {
+              if (typeof(obj[nodeName].push) == "undefined") {
+                var old = obj[nodeName];
+                obj[nodeName] = [];
+                obj[nodeName].push(old);
+              }
+              obj[nodeName].push(xmlToJson(item));
+            }
+          }
+        }
+        return obj;
+      };
+
+      $.get(jobUrl)
+        .done(function(data){
+          
+          console.log(data);
+          var jobsJson = xmlToJson(data);
+          console.log(jobsJson);
+          var jobsArray = jobsJson.response.results.result;
+          map.panTo(currentLatLng);
+          map.setZoom(10);
+          // var homeImg = 'BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE';
+          // var infowindow = new google.maps.InfoWindow({
+          //   map: map,
+          //   position: currentLatLng,
+          //   content: "You are here."
+          // });
+          jobsArray.forEach(function(element,index){
+            console.log(index);
+            console.log("______________________");
+            console.log("______________________");
+            console.log("Job Title: " + element.jobtitle);
+            console.log("Employer: " + element.company);
+            console.log("Posted " + element.formattedRelativeTime);
+            console.log(element.latitude + ", " + element.longitude);
+            // jobLatLng = [element.latitude, element.longitude];
+            $("#jobTitle" + index).text(element.jobtitle);
+            $("#employer" + index).text(element.company);
+            $("#posted" + index).text(element.formattedRelativeTime);
+            $("#applyBtn" + index).prop("bacon", element.url);
+            console.log($(".box" + index).prop("bacon"));
+            // $("#applyBtn" + index).attr("bacon", element.url);
+            //  console.log($(".box" + index).attr("bacon"));
+
+            
+
+
+
+            // var currentLatLng = {
+            //   lat: 29.424122, 
+            //   lng: -98.493629
+            // }
+            
+            jobLatLng = {
+              lat: parseFloat(element.latitude),
+              lng: parseFloat(element.longitude)
+            };
+            console.log(currentLatLng);
+            console.log(jobLatLng);
+
+              if (index == 0) {
+                letterIcon = "/img/markera.png";
+                title = "A";
+              }
+              else if (index == 1) {
+                letterIcon = "/img/markerb.png";
+                title = "B";
+              }
+              else {
+                letterIcon = "/img/markerc.png";
+                title = "C"
+              }
+             
+            
+            marker = new google.maps.Marker({
+              map: map,
+              draggable: false,
+              animation: google.maps.Animation.DROP,
+              position: jobLatLng,
+              icon: letterIcon
+            });
+            // markersArray.push(marker); 
+            // console.log(markersArray);
+        })
+
+// $("body").on("click", ".deleteBtn",function(){
+
+$("body").on("click", "#applyBtn0", function(){
+    open($("#applyBtn0").prop("bacon"));
+    console.log("clicked");
+    console.log($("#applyBtn0").prop("bacon"));
+  });
+$("body").on("click", "#applyBtn1", function(){
+    open($("#applyBtn1").prop("bacon"));
+    console.log("clicked");
+    console.log($("#applyBtn1").prop("bacon"));
+  });
+$("body").on("click", "#applyBtn2", function(){
+    open($("#applyBtn2").prop("bacon"));
+    console.log("clicked");
+    console.log($("#applyBtn2").prop("bacon"));
+  });
+
+
+      
+  // console.log($(".box1").name());
+  
+});
+
+  // $("#box1Class").hover(
+  //       console.log("enter"),
+  //       markersArray[0].setAnimation(google.maps.Animation.BOUNCE)
+  //     );
+    
+  //   $("#box1Class").hover(
+  //       console.log("exit"),
+  //        markersArray[0].setAnimation(null)
+  //     );
+      
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
